@@ -18,12 +18,8 @@ export class MailGunEmailService implements IMailService {
     };
     
     try {
-      return new Promise((resolve, reject) => {
-        this.mailClient.messages().send(data, (error: string, body: any) => {
-          console.log('inside the mail service: ', body);
-          resolve({ message: 'Success', success: true })
-        });
-      })
+      await this.mailClient.messages().send(data);
+      return { message: 'Success', success: true }
       
     } catch (err) {
       console.log(err)
